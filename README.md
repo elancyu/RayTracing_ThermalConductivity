@@ -1,9 +1,11 @@
 # RayTracing_ThermalConductivity
 This code is used to calculate the the effective MFP for nanostructure.
-# Hard Code Part:
+
+Hard Code Part:
 1. The inlet and outlet surface are parallel and they are on a plane which is normal to Z direction.
 2. The geometry consists of triangular surfaces.
-# Example Input: remove all the lines starting with '#'
+
+Example Input: remove all the lines starting with '#'
 File1: for the MFP spectra
 /# use "#" to comment
 /# First line: total number of MFP bins
@@ -67,5 +69,8 @@ File2: for the geometry
 
 /# Again, remove all the lines with '#' for input.
 The geometry input can be generated with COMSOL with some modification.
-# The codes can be modified freely.
-# Reference Methodology: F. Yang and C. Dames, Physical Review B 87 (2013).
+
+
+The codes can be modified freely.
+
+Reference Methodology: F. Yang and C. Dames, Physical Review B 87 (2013).
