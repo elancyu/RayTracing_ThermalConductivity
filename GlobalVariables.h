@@ -31,6 +31,7 @@ extern unsigned long long RandSeed;              // Random number generator seed
 extern int NumPoints;                            // Number of Points;
 extern int NumSurfaces;                          // Number of Surfaces;
 extern int NumPeriods;                           // Simulation period number;
+extern int NumOut;                               // Number of Transmitted Particles.
 extern int NumInSurfaces;                        // Number of Surfaces in inflow.
 extern int NumOutSurfaces;                       // Number of Surfaces in outflow.
 extern int NumParticles;                         // Number of Particles in simulation.re-intialize for different bulkMFP

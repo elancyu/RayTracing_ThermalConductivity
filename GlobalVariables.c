@@ -29,13 +29,14 @@ unsigned long long RandSeed;              // Random Seed
 int NumPoints;                            // Number of Points;
 int NumSurfaces;                          // Number of Surfaces;
 int NumPeriods;                           // Simulation period number;
+int NumOut;                               // Number of Transmitted Particles.
 int NumInSurfaces;                        // Number of Surfaces in inflow.
 int NumOutSurfaces;                       // Number of Surfaces in outflow.
 int NumParticles=10;                  // Number of Particles in simulation.re-intialize for different bulkMFP
 int NumTrans;                             // Number of transmitted Particles.  re-intialize for different bulkMFP
 int NumReflect;                           // Number of reflected Particles.    re-intialize for different bulkMFP
 double UnitCellLength;                      // Input the sample length.Thus the inflow and outflow surfaces are parallel.
-double Spec;                              // Input specularity.
+double Spec = 0.0;                              // Input specularity.
 
 // Fixed Constant;
 double const INF=1e20;                         // Represent the infinity.

@@ -13,16 +13,8 @@ int main(void)//int argc, char* argv[])
 	// Does not calculate thermal conductivity
 	if (indicator == 0)
 	{
-		// Firstly build the geometry
-		//pathgeo = argv[2];
-		//pathspectra = argv[3];
-		//NumPeriods = atoi(argv[4]);
-    	//Spec = atoi(argv[5]);
-		//NumPeriods = 3;
-		//Spec = 0;
 		pathgeo = "geo.in";
 		pathspectra = "mfps.in";
-		NumPeriods = 50;
 		Spec = 0;
 		GeoBuilder(pathgeo);
 		printf("Succeeded Building Geometry\n");
@@ -34,8 +26,8 @@ int main(void)//int argc, char* argv[])
 	else if (indicator== 1)
 	{
 		// Firstly build the geometry
-		//pathgeo = argv[2];
-		//pathspectra = argv[3];
+		pathgeo = "./geo.in";// argv[2];
+		pathspectra = "Si.in";// = argv[3];
 		//NumPeriods = atoi(argv[4]);
     	//Spec = atoi(argv[5]);
 		GeoBuilder(pathgeo);

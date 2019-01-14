@@ -92,6 +92,8 @@ int GeoBuilder(char* fname)
 	OutSurfaces = (int*)malloc(NumOutSurfaces*sizeof(int));
 	for (i = 0; i < NumOutSurfaces; i++)
 		fscanf(fpgeo, "%d", &OutSurfaces[i]);
+	// read in Number of Periods
+	fscanf(fpgeo, "%d", &NumPeriods);
 	// read in unitcell length (in nm)
 	fscanf(fpgeo, "%lf", &UnitCellLength);
 	// read in the total number of particle in simulation.
@@ -152,8 +154,8 @@ int GeoBuilder(char* fname)
 	for (i = 0; i < NumOutSurfaces; i++)
 		fprintf(fpchecker, "%d\n",OutSurfaces[i]);
 	fprintf(fpchecker,"\nNumPeriods:%d\n",NumPeriods);
-	fprintf(fpchecker,"UnitCell Length:%.3lf\n",UnitCellLength);
-	fprintf(fpchecker,"Sample Length:%.3lf\n",UnitCellLength*NumPeriods);
+	fprintf(fpchecker,"UnitCell Length:%.3e\n",UnitCellLength);
+	fprintf(fpchecker,"Sample Length:%.3e\n",UnitCellLength*NumPeriods);
 	fprintf(fpchecker,"Particle Number in Calculation:%d\n", NumParticles);
 	for (i = 0; i < NumSurfaces; i++)
 		fprintf(fpchecker,"Surface:%d, Normal=(%lf,%lf,%lf), Displacement:%lf\n",i,SurfaceNorms[i][0],SurfaceNorms[i][1],SurfaceNorms[i][2],Displacement[i]);

@@ -22,6 +22,7 @@ double CalTransmission(double bulkMFP)
 	fracnum = NumParticles*5/100;              // 5 percent
 
 	// Calculate transmission by performing Ray Tracing
+	printf("MFP = %f\n", bulkMFP);
 	insurf = 0;                     // default as the first surface; then search to update it.
 	for (i = 0; i < NumParticles; i++)
 	{

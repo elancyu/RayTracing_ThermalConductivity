@@ -42,11 +42,14 @@ int CalTherm(char *fname)
 	MFPs = (double*)malloc(NumBins*sizeof(double));
 	Klambda = (double*)malloc(NumBins*sizeof(double));
 	dlambda = (double*)malloc(NumBins*sizeof(double));
-	for (i = 0; i < NumBins; i++)
+	fscanf(fpspectra, "%lf", &MFPs[i]);
+	fscanf(fpspectra, "%lf", &Klambda[i]);
+	dlambda[0] = 0;
+	for (i = 1; i < NumBins; i++)
 	{
 		fscanf(fpspectra, "%lf",&MFPs[i]);
 		fscanf(fpspectra, "%lf",&Klambda[i]);
-		fscanf(fpspectra, "%lf",&dlambda[i]);
+		dlambda[i] = Klambda[i] - Klambda[i - 1];
 	}
 	fclose(fpspectra);
 	
@@ -70,14 +73,13 @@ int CalTherm(char *fname)
 		return 0;          // and other error msg.
 	fprintf(fpresult,"Variables = \"Bulk_MFP\",\"Nano_MFP\",\"Transmission\"\n\n");
 	fprintf(fpresult,"Zone T = \"RayTracing\", I = %d, DataPacking = Point\n", NumBins);
-	for (i = 0; i < NumBins; i++)
+	for (i = 1; i < NumBins; i++)
 	{
-		K = Klambda[i];
-		bulkMFP = MFPs[i];
-		delta = dlambda[i];
+		bulkMFP = (MFPs[i]+MFPs[i-1])*0.5;
+		K = dlambda[i];
 		transmission = CalTransmission(bulkMFP);
 		effectiveMFP = 3.0/4.0*transmission*SampleLength;
-		effectiveTC = effectiveTC + K*delta*effectiveMFP/bulkMFP;
+		effectiveTC = effectiveTC + K*effectiveMFP/bulkMFP;
 		fprintf(fpresult,"%lf  %lf   %lf\n",bulkMFP, effectiveMFP, transmission);
 	}
 	fclose(fpresult);

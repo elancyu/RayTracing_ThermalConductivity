@@ -16,6 +16,7 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 	int out = 0;                                     // mark the state of particle: in:0; transmit:1;reflect:-1
 	int ZCounter=1;                                  // INIT ZCounter
 	int p1,p2,p3;
+	double x1, y1, z1;
 	// Initialization of some of the aspects.
 	double freepath;
 	double cosangle;
@@ -49,10 +50,15 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 				SurfaceNorms[i][0] = -a;
 				SurfaceNorms[i][1] = -b;
 				SurfaceNorms[i][2] = -c;
-				Displacement[i] = -Displacement[i];
+				p1 = Surfaces[i][0];
+				x1 = Points[p1][0];
+				y1 = Points[p1][1];
+				z1 = Points[p1][2];
+				Displacement[i] = x1*a+y1*b+z1*c;
 				cosangle = SurfaceNorms[i][0]*ptc.tx+SurfaceNorms[i][1]*ptc.ty+SurfaceNorms[i][2]*ptc.tz;
 			}
-			
+
+
 			// exclude the previous surface and parallel surface
 			if (i!=ptc.Surface && cosangle!=0)
 			{
@@ -101,9 +107,6 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 					// u & v: coefficients
 					u = (c*d-b*e)/(a*c-b*b);
 					v = (a*e-b*d)/(a*c-b*b);
-					//S1 = TriArea(position,Points[p1],Points[p2]);
-					//S2 = TriArea(position,Points[p1],Points[p3]);
-					//S3 = TriArea(position,Points[p2],Points[p3]);
 					// if the intercept point is out of the triangle, it will not hit on the surface.
 					//if (S1+S2+S3-SurfaceAreas[i]>1e-6)
 						//dist2surf[i] = INF;
@@ -130,9 +133,6 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 		}
 
 		// Track Down the hitface
-		//fperror = fopen("./trackparticle.txt","a+");
-		//fprintf(fperror,"hitface:%d, surfacemarker:%d\n",hitface,SurfaceMarker[hitface]);
-		//fclose(fperror);
 		// error msg
 		if (dist==INF)
 		{
@@ -217,17 +217,10 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 					{
 						if (IsInsideTriangle2D(ptc.x, ptc.y, OutSurfaces[j]))
 						{
-							//printf("Last Hit:%d, Fake Hit:%d\n",ptc.Surface, hitface);
 							ptc.Surface = OutSurfaces[j];
-							//printf("Found the OutSurfaces:%d!\n",ptc.Surface);
 							break;
 						}
 					}
-					/*if (!Found)
-					{
-						//printf("Didn't Found the Corresponding Surface In OutSurfaces!\n");
-						//system("pause");
-					}*/
 				}
 			}
 		// type II
@@ -247,17 +240,10 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 					{
 						if (IsInsideTriangle2D(ptc.x,ptc.y,InSurfaces[j]))
 						{
-							//printf("Last Hit:%d, Fake Hit:%d\n",ptc.Surface, hitface);
 							ptc.Surface = InSurfaces[j];
-							//printf("Found the OutSurfaces:%d!\n",ptc.Surface);
 							break;
 						}
 					}
-					/*if (!Found)
-					{
-						//printf("Didn't find the corresponding surfaces in InSurfaces\n");
-						///system("pause");
-					}*/
 				}
 			}
 			// 	Regular surfaces.
@@ -306,15 +292,10 @@ void PerformRayTracing(double bulkMFP, particle ptc)
 
 	// Outside the while loop
 	if (out==1)
-	{
-		//printf("Transmit\n");
 		NumTrans = NumTrans + 1;
-	}
 	else
-	{
-		//printf("Reflect\n");
+
 		NumReflect = NumReflect + 1;
-	}
 	// There seem to be nothing we can do.
 }
 
