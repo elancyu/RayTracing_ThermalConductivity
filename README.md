@@ -1,4 +1,5 @@
 **RayTracing_ThermalConductivity**
+'var x - 7;'
 This code is used to calculate the the effective MFP for nanostructure.
 
 Hard Code Part:
