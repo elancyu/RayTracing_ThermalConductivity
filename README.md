@@ -76,4 +76,4 @@ The codes can be modified freely.
 
 Reference Methodology: F. Yang and C. Dames, Physical Review B 87 (2013).
 
-my page: [elancyu](https://github.com/elancyu)
+my page: [elancyu](https://github.com/elancyu/RayTracing_ThermalConductivity)
